@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Web Programming</title>
+	<link rel="stylesheet" href="css/nodelist.css">
+
+</head>
+<body>
+  <div id="container">
+    <h1>Web Programming</h1>
+
+    <button onclick = "get_json()" src = "images/save.jpg"> Json 저장 </button> 
+
+    <p>공부할 주제를 기록해 보세요</p>
+    <form action="">
+      <input type="text" id="subject" autofocus>
+      <button onclick = "newRegister() ; return false ;">추가</button>
+    </form>
+    <hr>  
+    <ul id="itemList"></ul>  
+  </div>
+
+	<script>
+	      function newRegister(){
+		let newItem = document.createElement("li");
+		let subject = document.querySelector("#subject");
+		let newText = document.createTextNode(subject.value) ; 
+		let itemList = document.getElementById("itemList") ;	
+	
+		let button = document.createElement("button")  // 넘버링까지 해보기
+		
+
+		button.textContent = "삭제" + ( itemList.childNodes.length+1 ) ; 
+		button.setAttribute("src",  "images/delete.png") ;
+
+
+		 /* let srcNode = document.createAttribute("src") ;
+		srcNode.value = "images/delete.png"	;
+		button.appendChild(srcNode) ;
+		*/
+
+
+		newItem.appendChild(newText) ;		
+		newItem.appendChild(button) ;
+
+		// document.getElementById("itemList").appendChild(newItem) ; 
+
+		itemList.insertBefore(newItem, itemList.childNodes[0]) ;
+		subject.value = "" ;
+
+
+		button.onclick = function(){
+			newItem.parentNode.removeChild(newItem) ;  			
+		} ;
+ 	}
+	    function get_json(){
+		let lis = document.getElementsByTagName("li") ;
+		strs = [] ;
+		for(let i = 0; i < lis.length; i++){
+    			strs.push(lis[i].childNodes[0].textContent) ; 
+		}
+		localStorage.setItem('json', JSON.stringify(strs)) ;
+ }
+
+
+	</script>
+</body>
+</html>
