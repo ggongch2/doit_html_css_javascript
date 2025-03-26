@@ -1,0 +1,3 @@
+queryselector -> element 반환
+query____all -> Nodelist -> 복사본, 참조 X, 
+getelementby__ -> HTMLCollection -> 참조 
